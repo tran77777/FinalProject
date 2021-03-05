@@ -19,8 +19,9 @@
 							<headerToolbar>
 								<OverflowToolbar>
 									<content>
-										<SearchField id="searchFieldGroupText" placeholder="SubGroupText" tooltip="Search" search="onSearch"
-								 width="auto"></SearchField>
+										<SearchField id="searchFieldGroupText" placeholder="SubGroupText" tooltip="Search" search="onSearch" width="auto"></SearchField>
+										<ToolbarSpacer/>
+										<Button icon="sap-icon://add" enabled="true"  press="onSubGroupDialogOpen"/>
 									</content>
 								</OverflowToolbar>
 							</headerToolbar>

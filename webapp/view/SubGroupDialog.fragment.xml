@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog id="SubGroupDialog" title="SubGroupDialog">
+		<VBox class="sapUiResponsiveMargin">
+			
+			<Label text="SubGroupText" labelFor="SubGroupText" design="Bold"/>
+			<Input  value="{objectPageView>/inputValidation/SubGroupText}" valueLiveUpdate="true" liveChange="onLiveChange"/>
+			
+		</VBox>
+		<buttons>
+			<Button type="Emphasized" text="{i18n>dialogSaveButtonText}" enabled="{objectPageView>/inputValidation/saveButtonEnabled}" press="onSubGroupSave"/>
+			<Button text="{i18n>dialogCancelButtonText}" press=".onCloseSubGroupDialog"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

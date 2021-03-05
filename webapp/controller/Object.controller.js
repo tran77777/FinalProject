@@ -6,7 +6,8 @@ sap.ui.define([
 	"Jet/ControlTaskChimburArtem/model/formatter",
 	'sap/m/MessageToast',
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
+	"sap/ui/model/FilterOperator",
+	"sap/ui/core/Fragment"
 ], function(
 	BaseController,
 	JSONModel,
@@ -14,7 +15,8 @@ sap.ui.define([
 	formatter,
 	MessageToast,
 	Filter,
-	FilterOperator
+	FilterOperator,
+	Fragment
 ) {
 	"use strict";
 
@@ -37,7 +39,11 @@ sap.ui.define([
 			var iOriginalBusyDelay,
 				oViewModel = new JSONModel({
 					busy: true,
-					delay: 0
+					delay: 0,
+					inputValidation:{
+						SubGroupText:""
+					}
+					
 				});
 
 			this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
@@ -168,13 +174,74 @@ sap.ui.define([
 		},
 		_applySearch: function(aTableSearchState) {
 			var oTable = this.byId("table"),
-				oViewModel = this.getModel("worklistView");
+				oViewModel = this.getModel("objectPageView");
 			oTable.getBinding("items").filter(aTableSearchState, "Application");
 			// changes the noDataText of the list in case there are no filter results
 			if (aTableSearchState.length !== 0) {
 				oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
 			}
+		},
+		onSubGroupDialogOpen: function() {
+			var oView = this.getView();
+
+			// create dialog lazily
+			if (!this.pSubGroupDialog) {
+				this.pSubGroupDialog = Fragment.load({
+					id: oView.getId(),
+					name: "Jet.ControlTaskChimburArtem.view.SubGroupDialog",
+					controller: this
+				}).then(function(oDialog) {
+					// connect dialog to the root view of this component (models, lifecycle)
+					oView.addDependent(oDialog);
+					return oDialog;
+				});
+			}
+			this.pSubGroupDialog.then(function(oDialog) {
+				oDialog.open();
+			});
+		},
+		onCloseSubGroupDialog: function() {
+			this.byId("SubGroupDialog").close();
+		
+			
+		
+			this.getModel('objectView').setProperty("/inputValidation/SubGroupText", "");
+
+		},
+
+		onSubGroupSave: function() {
+
+			var oModel = this.getOwnerComponent().getModel();
+
+			var oItemRow = {
+
+				GroupID:this.getView().getBindingContext().getProperty("GroupID"),
+				SubGroupText: this.getModel('objectView').getProperty("/inputValidation/SubGroupText"),
+				Version: "A",
+				
+			
+				Language: "RU"
+			};
+
+			var infoMB = this.getView().getModel("i18n").getResourceBundle().getText("infoMB");
+			var sStatusSuccessi18n = this.getView().getModel("i18n").getResourceBundle().getText("messageBoxSuccsess");
+			var messageBoxError = this.getView().getModel("i18n").getResourceBundle().getText("messageBoxUpdateError");
+			oModel.create("/zjblessons_base_SubGroups", oItemRow, {
+				success: function() {
+					sap.m.MessageBox.show(sStatusSuccessi18n, {
+						icon: sap.m.MessageBox.Icon.SUCCESS,
+						title: infoMB
+					});
+
+				},
+				error: function() {
+					sap.m.MessageBox.error(messageBoxError);
+				}
+			});
+
+			this.onCloseSubGroupDialog();
 		}
+	
 
 	});
 
