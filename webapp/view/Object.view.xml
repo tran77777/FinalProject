@@ -1,0 +1,98 @@
+<mvc:View controllerName="Jet.ControlTaskChimburArtem.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	xmlns:smartField="sap.ui.comp.smartfield" xmlns:smartForm="sap.ui.comp.smartform" xmlns:footerbar="sap.ushell.ui.footerbar">
+	<semantic:SemanticPage headerPinnable="false" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+		toggleHeaderOnTitleClick="false" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}">
+		<semantic:titleHeading>
+			<l:VerticalLayout>
+				<Button tooltip="Back to worklist" enabled="{= !${objectView>/enableChange}}" icon="{i18n>bbNavBack}" press="onNavBack"/>
+				<Title text=" {parts:['i18n>headerObjectText', 'MaterialID', 'MaterialText','IntegrationID' ], formatter: 'jQuery.sap.formatMessage' } "/>
+			</l:VerticalLayout>
+		</semantic:titleHeading>
+		<semantic:content>
+			<IconTabBar id="iconTabBar" stretchContentHeight="true" select=".onFilterSelect" expanded="true" class="sapUiNoContentPadding">
+				<items>
+					<IconTabFilter id="List" icon="sap-icon://group" enabled="{= !${objectView>/enableChange} || ${objectView>/selectedTab}==='List'}"
+						key="List">
+						<Table id="table" inset="false"
+							items="{ path: 'zjblessons_base_Groups__zjblessons_base_SubGroups', sorter: { path: 'SubGroupText' , group:true}}">
+							<headerToolbar>
+								<OverflowToolbar>
+									<content>
+										<SearchField id="searchFieldGroupText" placeholder="SubGroupText" tooltip="Search" search="onSearch"
+								 width="auto"></SearchField>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column >
+									<Text text="SubGroupID"/>
+								</Column>
+								<Column >
+									<Text text="Version"/>
+								</Column>
+								<Column >
+									<Text text="GroupID"/>
+								</Column>
+								<Column >
+									<Text text="Language"/>
+								</Column>
+								<Column >
+									<Text text="SubGroupText"/>
+								</Column>
+								<Column >
+									<Text text="Created"/>
+								</Column>
+								<Column >
+									<Text text="CreatedBy"/>
+								</Column>
+								<Column >
+									<Text text="CreatedByFullName"/>
+								</Column>
+								<Column >
+									<Text text="CreatedByAvatar"/>
+								</Column>
+								<Column >
+									<Text text="Modified"/>
+								</Column>
+								<Column >
+									<Text text="ModifiedBy"/>
+								</Column>
+								<Column >
+									<Text text="ModifiedByFullName"/>
+								</Column>
+								<Column >
+									<Text text="ModifiedByAvatar"/>
+								</Column>
+								<Column >
+									<Text text="IntegrationID"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{SubGroupID}"/>
+										<Text text="{Version}"/>
+										<Text text="{GroupID}"/>
+										<Text text="{Language}"/>
+										<Text text="{SubGroupText}"/>
+										<Text text="{Created}"/>
+										<Text text="{CreatedBy}"/>
+										<Text text="{CreatedByFullName}"/>
+										<Text text="{CreatedByAvatar}"/>
+										<Text text="{Modified}"/>
+										<Text text="{ModifiedBy}"/>
+										<Text text="{ModifiedByFullName}"/>
+										<Text text="{ModifiedByAvatar}"/>
+										<Text text="{IntegrationID}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://approvals" key="Form" enabled="{= !${objectView>/enableChange} || ${objectView>/selectedTab}==='Form'}"></IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+	</semantic:SemanticPage>
+</mvc:View>

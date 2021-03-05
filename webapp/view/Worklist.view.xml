@@ -1,0 +1,54 @@
+<mvc:View controllerName="Jet.ControlTaskChimburArtem.controller.Worklist" xmlns="sap.m" xmlns:smartfilterbar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic" xmlns:core="sap.ui.core">
+	
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<smartfilterbar:SmartFilterBar id="smartFilterBar" useVariantManagement="true" smartVariant="__SVM01" persistencyKey="UniqueAndStablePersistencyKey"
+				entitySet="zjblessons_base_Groups" header="Groups" useToolbar="true"  >
+		
+				
+				</smartfilterbar:SmartFilterBar>
+			</semantic:headerContent>
+		<semantic:content>
+			<smartTable:SmartTable id="LineItemsSmartTable" persistencyKey="SmartTableAnalytical_Explored" entitySet="zjblessons_base_Groups"
+					smartFilterId="smartFilterBar" tableType="ResponsiveTable" useExportToExcel="true" useVariantManagement="true"
+					useTablePersonalisation="true" header="Line Items" showRowCount="true" enableAutoBinding="true" showFullScreenButton="true"
+					>
+					<!-- layout data used to make the table growing but the filter bar fixed -->
+					<smartTable:customToolbar>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+						
+						
+							<Button icon="sap-icon://add" press=".onOpenDialog"/>
+							
+						</OverflowToolbar>
+					</smartTable:customToolbar>
+					<Table id="table" mode="MultiSelect" width="auto" noDataText="{worklistView>/tableNoDataText}"
+						busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="20" updateFinished=".onUpdateFinished">
+						<columns>
+							<Column id="Dmbtr" hAlign="Begin">
+					<customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnIndex":"999"}' />
+					</customData>
+					<Text text="{/#LineItems/Dmbtr/@sap:label}" />
+				</Column>
+						</columns>
+						<items>
+							<ColumnListItem type="Navigation" press=".onPress">
+								<Button icon="sap-icon://add" press=".onShowId"/>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</smartTable:SmartTable>
+		</semantic:content>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+	</semantic:SemanticPage>
+</mvc:View>

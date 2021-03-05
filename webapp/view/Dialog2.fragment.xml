@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog id="oDialog" title="{i18n>dialogTitle}">
+		<VBox class="sapUiResponsiveMargin">
+			
+			<Label text="SubGroupText" labelFor="SubGroupText" design="Bold"/>
+			<Input  value="{worklistView>/inputValidation/GroupText}" valueLiveUpdate="true" liveChange="onLiveChange"/>
+			<Label text="GroupDescription" labelFor="MaterialText" design="Bold"/>
+			<Input  value="{worklistView>/inputValidation/GroupDescription}" valueLiveUpdate="true" liveChange="onLiveChange"/>
+		</VBox>
+		<buttons>
+			<Button type="Emphasized" text="{i18n>dialogSaveButtonText}" enabled="{worklistView>/inputValidation/saveButtonEnabled}" press=".onSave"/>
+			<Button text="{i18n>dialogCancelButtonText}" press=".onCloseDialog"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>
