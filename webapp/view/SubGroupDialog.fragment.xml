@@ -7,8 +7,8 @@
 			
 		</VBox>
 		<buttons>
-			<Button type="Emphasized" text="{i18n>dialogSaveButtonText}" enabled="{objectPageView>/inputValidation/saveButtonEnabled}" press="onSubGroupSave"/>
-			<Button text="{i18n>dialogCancelButtonText}" press=".onCloseSubGroupDialog"/>
+			<Button type="Emphasized" text="Save" enabled="{objectPageView>/inputValidation/saveButtonEnabled}" press="onSubGroupSave"/>
+			<Button text="Close" press=".onCloseSubGroupDialog"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

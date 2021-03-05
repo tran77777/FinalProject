@@ -5,7 +5,7 @@
 		toggleHeaderOnTitleClick="false" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}">
 		<semantic:titleHeading>
 			<l:VerticalLayout>
-				<Button tooltip="Back to worklist" enabled="{= !${objectView>/enableChange}}" icon="{i18n>bbNavBack}" press="onNavBack"/>
+				<Button tooltip="Back to worklist" enabled="{= !${objectView>/enableChange}}" icon="sap-icon://nav-back" press="onNavBack"/>
 				<Title text=" {parts:['i18n>headerObjectText', 'MaterialID', 'MaterialText','IntegrationID' ], formatter: 'jQuery.sap.formatMessage' } "/>
 			</l:VerticalLayout>
 		</semantic:titleHeading>

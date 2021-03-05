@@ -8,8 +8,8 @@
 			<Input  value="{worklistView>/inputValidation/GroupDescription}" valueLiveUpdate="true" liveChange="onLiveChange"/>
 		</VBox>
 		<buttons>
-			<Button type="Emphasized" text="{i18n>dialogSaveButtonText}" enabled="{worklistView>/inputValidation/saveButtonEnabled}" press=".onSave"/>
-			<Button text="{i18n>dialogCancelButtonText}" press=".onCloseDialog"/>
+			<Button type="Emphasized" text="Save" enabled="{worklistView>/inputValidation/saveButtonEnabled}" press=".onSave"/>
+			<Button text="Close" press=".onCloseDialog"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>
